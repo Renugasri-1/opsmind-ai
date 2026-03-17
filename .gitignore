@@ -1,0 +1,27 @@
+# Ignore backend node modules
+/backend/node_modules/
+
+# Ignore frontend node modules (if any)
+/frontend/node_modules/
+
+# Ignore environment files
+/backend/.env
+/backend/.env.local
+/backend/.env.*.local
+
+# Ignore logs
+/backend/*.log
+/frontend/*.log
+
+# Ignore uploads folder (if you don’t want to commit user files)
+/backend/uploads/
+
+# Ignore VS Code workspace settings
+.vscode/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore any build/dist folders (if generated)
+/frontend/build/
