@@ -39,8 +39,21 @@ async function parsePDF(filePath) {
         for (let i = 0; i < chunks.length; i++) {
 
             const chunk = chunks[i];
+              
+            if (!chunk || chunk.trim().length === 0) {
+        continue;
+    }
 
             const embedding = await createEmbedding(chunk);
+
+            if (
+        !embedding ||
+        embedding.length !== 384 ||
+        embedding.some(val => !isFinite(val))
+    ) {
+        console.log("Skipping invalid embedding at chunk:", i);
+        continue;
+    }
 
             const newChunk = new Chunk({
                 text: chunk,

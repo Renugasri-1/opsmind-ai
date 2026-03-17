@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const uploadRoute = require("./routes/upload");
+const queryRoute = require("./routes/query");
 
 const app = express();
 
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGO_URI)
 .catch(err => console.log(err));
 
 app.use("/upload", uploadRoute);
+app.use("/query", queryRoute);
 
 const PORT = process.env.PORT || 5000;
 

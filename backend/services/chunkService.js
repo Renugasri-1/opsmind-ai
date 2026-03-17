@@ -12,7 +12,7 @@ function chunkText(text){
         chunks.push(chunk);
     }
 
-    return chunks;
+    return chunks.filter(chunk => chunk && chunk.trim().length > 0);
 }
 
 module.exports = chunkText;
