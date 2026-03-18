@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
         // ✅ STEP 1: Generate query embedding
         const queryEmbedding = await getQueryEmbedding(query);
 
-        // ✅ STEP 2: Validate embedding (VERY IMPORTANT)
+        // ✅ STEP 2: Validate embedding 
         if (
             !queryEmbedding ||
             queryEmbedding.length !== 384 ||
@@ -26,11 +26,31 @@ router.post("/", async (req, res) => {
             });
         }
        //step3:Retrieve top chunks
-        const topChunks = await retrieveRelevantChunks(queryEmbedding);
-        const context = topChunks.map(c => c.text).join("\n");
+        let topChunks = await retrieveRelevantChunks(queryEmbedding);
+        
+// ✅ Sort by score (highest first)
+topChunks = topChunks.sort((a, b) => b.score - a.score);
+
+// ✅ Take top 3 (not 2, safer)
+topChunks = topChunks.slice(0, 3);
+        if (!topChunks || topChunks.length === 0) {
+            return res.json({
+                answer: "I don't know based on available documents.",
+                chunks: []
+            });
+        }
+        //step 4:prepare context with citations for ai
+        const contextWithCitations = topChunks
+            .map((c, i) => `Point ${i + 1} (Source: ${c.source}, Page: ${c.page}): ${c.text}`)
+            .join("\n\n");
 
 // generate safe answer
-const answer = await generateAnswer(query, context);
+let answer = await generateAnswer(query, contextWithCitations);
+
+//ensure guardrail
+if (!answer || answer.trim().length === 0) {
+            answer = "I don't know based on available documents.";
+        }
 
 // ✅ Send final response
 res.json({
