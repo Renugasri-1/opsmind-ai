@@ -1,4 +1,4 @@
-/*async function generateAnswer(query, context) {
+async function generateAnswer(query, context) {
 try {
         // ✅ Guardrail: if no context, return safe response
         if (!context || context.trim().length === 0) {
@@ -20,7 +20,7 @@ ${context.substring(0, 1000)}
     }
 }
 
-module.exports = generateAnswer;*/
+module.exports = generateAnswer;
 
 
 
@@ -77,7 +77,7 @@ Answer:
 
 module.exports = generateAnswer;*/
 
-const { pipeline } = require("@xenova/transformers");
+/*const { pipeline } = require("@xenova/transformers");
 
 let generator;
 
@@ -101,9 +101,15 @@ async function generateAnswer(query, contextWithCitations) {
         const prompt = `
 You are an AI assistant.
 
-Answer the question based only on the given context.
-Summarize clearly in simple words.
-Include source filename and page number
+Your task is to answer the question using ONLY the given context.
+
+IMPORTANT RULES:
+- Do NOT copy the context directly
+- Combine information from all points
+- Give a COMPLETE and structured answer
+- If multiple items exist (like types), list them clearly
+- Always include source and page number
+
 
 
 
@@ -117,13 +123,14 @@ Answer:
 
         // ✅ Generate answer
         const result = await generator(prompt, {
-            max_new_tokens: 300,
-            temperature: 0.2
+            max_new_tokens: 700,
+            temperature: 0.3,
         });
 
         // ✅ Extract clean output
         let text = result[0]?.generated_text || "";
 
+        text = text.replace(/^Answer:\s*//*i, "");// 2 comment remove it when reusing
         // Clean formatting
         text = text.replace(/\n{2,}/g, "\n").trim();
 
@@ -135,6 +142,5 @@ Answer:
     }
 }
 
-module.exports = generateAnswer;
-
+module.exports = generateAnswer;*/
 
