@@ -267,45 +267,44 @@ body {
 
 .admin-container {
   padding: 20px;
+  color: white;
 }
 
-/* Section titles */
-.admin-container h2 {
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: #1e1e2f;
+  padding: 15px;
+  border-radius: 12px;
   margin-bottom: 20px;
 }
 
-.admin-container h3 {
-  margin-top: 20px;
+.list-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #333;
+}
+
+.chat-item {
   margin-bottom: 10px;
-  color: #94a3b8;
 }
 
-/* Cards */
-.admin-card {
-  background: #1e293b;
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  border: 1px solid #1e293b;
-  transition: 0.3s;
-}
-
-.admin-card:hover {
-  border-color: #3b82f6;
-  transform: scale(1.02);
-}
-
-/* Dark variant for chats */
-.admin-card.dark {
-  background: #020617;
-}
-
-/* Text inside cards */
-.admin-card p {
-  margin-top: 5px;
-  font-size: 14px;
-  color: #cbd5f5;
-}
 .admin-btn {
   margin-left: 10px;
   padding: 8px 12px;
@@ -335,8 +334,4 @@ body {
 
 .back-btn:hover {
   background: #3b82f6;
-}
-.admin-card h4 {
-  margin-bottom: 10px;
-  color: #38bdf8;
 }
