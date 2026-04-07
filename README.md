@@ -84,7 +84,7 @@ admin → dashboard access
 1️⃣ Clone the repo
 
 
-git clone https://github.com/your-username/opsmind-ai.git
+git clone https://github.com/Renugasri-1/opsmind-ai.git
 cd opsmind-ai
 2️⃣ Backend Setup
 cd backend
